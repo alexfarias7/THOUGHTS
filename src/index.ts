@@ -1,9 +1,18 @@
-import Express from 'express';
+import Express, { Application, Request, Response } from 'express';
+import ExpressHandlebars from 'express-handlebars';
+import session from 'express-session';
+import sessionFileStore from 'session-file-store';
+import flash from 'express-flash';
+//* db
+import conn from './db/db';
 
-const app = Express();
+const FileStore = sessionFileStore(session);
 
-app.use('/', Express.static(`${__dirname}/static`));
+const app: Application = Express();
 
-app.listen(4000, () => {
-  console.log('server listen on http://localhost:4000');
-});
+conn
+  .sync()
+  .then(() => {
+    app.listen(3000);
+  })
+  .catch((err: any) => console.log(err));
