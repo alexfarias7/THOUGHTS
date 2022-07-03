@@ -13,7 +13,7 @@ const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
 
 try {
   sequelize.authenticate();
-} catch (error) {
+} catch (error: any) {
   console.log(`não foi possivel conectar:${error}`);
 }
 
